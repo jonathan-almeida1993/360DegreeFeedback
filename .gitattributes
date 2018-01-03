@@ -1,1 +1,2 @@
-
+special-vendored-path/* linguist-vendored
+dashboard.js linguist-vendored=true
