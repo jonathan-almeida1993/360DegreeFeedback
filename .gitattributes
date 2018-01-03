@@ -1,2 +1,7 @@
 special-vendored-path/* linguist-vendored
 dashboard.js linguist-vendored=true
+jquery.form.js linguist-vendored=true
+jquery.isloading.js linguist-vendored=true
+pace.js linguist-vendored=true
+nprogress.js linguist-vendored=true
+jquery.floatThead.js linguist-vendored=true
