@@ -1,0 +1,273 @@
+
+
+/* header content */
+.header{ padding:0px 0; background:#fff; border-bottom:2px solid #f5002d; /*margin-bottom:20px;*/  /*position:fixed;*/ top:0; width:100%; z-index:3;}
+.header img.logoImg{float:left; height:40px;}
+.header h5{float:right;}
+.header h5 a{ text-decoration:none; background:#f5002d; border-radius:10px; padding:3px 5px; color:#fff;}
+.header .img-responsive {max-width:60%;}
+.mahindraLogo {	padding-top:15px; max-width: 75%;}
+
+/* navigation menu*/
+.navheaderTop {width:100%;}
+
+.navheaderTop .navbar {border-radius:0px;}
+	
+.navheaderTop .navbar-inverse {	/*background: rgba( 0, 0, 0, 0.7);*/ background-color:#e31837; border:none; margin-bottom:0px;}
+	
+.navheaderTop .navbar-inverse .navbar-nav > li > a {
+	color:#fff;
+	font-size:14px;}
+	
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+	border-bottom:4px solid #fff;
+	background:none;
+	padding-bottom:12px}
+	
+.navbar-inverse .navbar-nav  a:hover{
+	border-bottom:4px solid #fff;
+	padding-bottom:12px;}
+	
+
+.dropdown-menu > li > a,.dropdown-menu > li > a:hover {
+	border-bottom:none!important;padding-bottom:0!important;
+	line-height:30px;}
+	````````````````````````````````````````````````````````
+.dropdown-menu > li > a {
+	padding: 15px 20px;}
+	
+.verticalLine{
+	color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    padding-top: 15px;}
+	
+.navbar-inverse .navbar-toggle {
+	border-color:#aa0720;}
+	
+.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+	background:#aa0720;}
+	
+/* sign out button*/
+
+/* #signOutBtn {
+	color: black;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    padding-top: 8px;
+    padding-bottom: 9px;
+    margin-top: 4px;
+	} */
+	
+.navbar-nav .signoutclass a:hover{
+	background-color: #989696 !important;
+	border-bottom : #989696;
+}
+
+
+/**** Start Background Color ****/
+
+.blue {background: #28ABE3;}
+
+.green {background: #72bf48;}
+
+.red {    background: #FF432E;}
+
+.light-red {    background: #FB6648;}
+
+.light-yellow {    background: #ffad1d;}
+
+.light-orange {    background: #FA6900;}
+
+.color {    background: #0ECEAB;}
+
+
+/**** Start Main Body Section ****/
+
+.mainbody-section { 
+	padding-top:105px;
+	padding-bottom:42px;
+	background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 50%;}
+
+.menu-item {
+    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+	border-radius: 15px;
+	
+}
+
+.menu-item a {
+    color: #fff;
+    display: block;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.menu-item a p {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.menu-item a i {
+    font-size: 50px;
+    padding-bottom: 20px;
+}
+
+.menu-item:hover a {
+    text-decoration: none;
+    //color: #333;
+	/*animation: tada;*/
+	/*-webkit-animation: tada;*/
+	/*animation-duration: 1000ms;*/
+	/*-webkit-animation-duration: 1000ms;*/
+}
+/* Start Copyright Section */ 
+.copyright {
+    background:#000;
+    padding-top:10px;
+    padding-bottom:10px;
+	width:100%;
+	position:fixed;
+	bottom:0px;
+	z-index: 999;
+}
+.copyright span {color:#FF432E;}
+
+/* end Copyright Section */ 
+
+/*more respondents content start*/
+.respondControl {
+       display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555555;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid #cccccc;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    border-radius:4px;
+}
+
+#nominateEmp .instRuctions {padding:0px;}
+#nominateEmp .addBtn {     margin-top:0px; background:#4cae4c;margin-bottom:0px;}
+#nominateEmp  #addMoreRespondentsBtnAfterSubmit {display: none;}
+#nominateEmp .submitBtn {  margin-bottom:0; margin-top:0;}
+#nominateEmp .moreBtn {float:right;margin-bottom: 0px; margin-top: 0px; position: relative; top: 100px;}
+#nominateEmp .modal-footer {border-top:none;}
+#nominateEmp .modal-header {border-bottom-color: #c10925;background: #e31837; color:#fff; padding:10px; border-radius:6px 6px 0 0;}
+#nominateEmp .modal-header .close {color: #fff; opacity: 1;}
+#nominateEmp .modal-content {border-radius:6px;}
+/*more respondents content end*/
+
+/*New Button Added*/
+.statusReportDownloadBtnDiv button {margin-bottom:42px; background: #e31837; border: 1px solid #e31837; padding:8px; border-radius:5px; color:#fff;}
+
+
+
+
+
+@media only screen 
+and (min-width : 600px) 
+and (max-width : 991px) {
+    
+    .menu-item {
+        display: inline-block;
+        width: 32.8%;
+    }
+    
+    .menu-item.responsive {
+        width: 49.5%;
+        float: left;
+        margin-right: 3px;
+    }
+    
+    .menu-item.responsive-2 {
+        width: 49.5%;
+        float: right;
+    }
+    
+    
+    }
+    
+}
+
+    
+
+
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+/*   #signOutBtn {
+	position:absolute;
+	right:-10px;
+  } */
+  .statusTabdisplay {
+	margin-right:60px;
+  }
+}
+
+
+
+
+@media only screen 
+and (min-width : 992px) 
+and (max-width : 1199px) {
+    
+    .menu-item {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    
+    .menu-item a i {
+        font-size: 32px;
+    }
+    
+    .menu-item a p {
+        font-size: 16px;
+    }
+    
+}
+
+
+.home-slider img {
+    width: 100%;
+    height: auto;
+}
+
+.home-slider .carousel-indicators {
+    position: absolute;
+    bottom:-5px;
+}
+
+.home-slider .carousel-indicators .active {
+	background-color: #FF432E;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

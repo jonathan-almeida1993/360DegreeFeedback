@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+	Specify a JDBC datasource for 360DegreeFeedback
+	for live server starts
+	using jtds driver
+	<Resource name="jdbc/dbConFor360DegreeFeedback" auth="Container" type="javax.sql.DataSource"
+		username="user" password="pass,123"
+		 driverClassName="net.sourceforge.jtds.jdbc.Driver" 
+		url="jdbc:jtds:sqlserver://localhost:49269/360DegreeFeedback"
+		initialSize="5" maxActive="10" maxIdle="3" maxWait="100000" poolPreparedStatements="true"
+		maxOpenPreparedStatements="10" />
+	for live server ends
+</Context>       
+ 
+
+
+
+ 

@@ -1,0 +1,1217 @@
+﻿<!DOCTYPE html>
+<html>
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+    <title>360DegreeFeedback</title>
+
+    <!-- JS Import starts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/util.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <script src="js/master.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/datatransfer.js"></script>
+    <script src="js/jquery.serializejson.min.js"></script>
+   <!--  <script src="js/dashInfo.js"></script>
+ -->
+    <script src="js/jquery.floatThead.js"></script>
+
+    <!-- Question Master Datatable starts -->
+    <script src="js/dashboarddatatable.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.js"></script>
+    <!-- <script src="js/bootbox.min.js"></script> -->
+    <!-- Question Master Datatable ends -->
+    <!-- JS Import ends -->
+    <!-- CSS Import starts -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/sweetalert.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/skin-red.css" rel="stylesheet">
+    <link href="css/bootstrap-table.css" rel="stylesheet">
+    <link href="css/styleHome.css" rel="stylesheet">
+    
+    <!-- Font Awesome CSS -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+
+    <!-- Question Master DataTable starts -->
+    <!-- <link href="css/dataTables.bootstrap.css" rel="stylesheet"> -->
+    <!-- Question Master DataTable Ends -->
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="js/jquery-ui.js"></script>
+    <!-- CSS Import Ends -->
+    <!-- Excel Upload Starts-->
+    <script src="js/EmployeeDetailsUpload.js"></script>
+    <script src="js/jquery.uploadfile.min.js"></script>
+    
+    <script type="text/javascript">
+	    function getReport(fb_id) {
+			$("#fbid").val(fb_id);
+			$("#cristlereport").submit();
+		}
+		function updateURL(){
+			$("form").attr("action",'http://bo1.mahindra.com:8080/BOE/OpenDocument/ARu9.cTRwLFOm7D5xj6KXFs/CrystalReports/viewrpt.cwr?id=1784284&promptex-Feedback+ID="'
+					+$("#fbid").val()+'"&cmd=EXPORT&EXPORT_FMT=U2FPDF%3a0');						
+			return true;
+		}
+		
+		 $(document).ready(function() {
+		        $.active = false;
+		        $('body').bind('click keypress', function() { $.active = true; });
+		        checkActivity(1000*60*60, 1000, 0); // timeout = 30 minutes, interval = 1 minute.
+		    });
+
+		    function checkActivity(timeout, interval, elapsed) {
+		        if ($.active) {
+		            elapsed = 0;
+		            $.active = false;
+		            $.get('DataController');
+		        }
+		        if (elapsed < timeout) {
+		            elapsed += interval;
+		            setTimeout(function() {
+		                checkActivity(timeout, interval, elapsed);
+		            }, interval);
+		        } else {
+		            window.location = 'login.html'; // Redirect to "session expired" page.
+		        }
+		    }
+		
+		
+    </script>
+    
+    
+    <link href="css/uploadfile.min.css" rel="stylesheet">
+    <!-- Excel Upload Ends-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="js/html5shiv.min.js"></script>
+          <script src="js/respond.min.js"></script>
+        <![endif]-->
+        
+
+</head>
+<body class="skin-red sidebar-mini  ">
+	<div class="header">
+				<div class="container-fluid">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="mahindraLogo"><img src="images/logo.jpg" alt="Mahindra Rise" class="img-responsive"></div>					
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-6"></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"></div>
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<img src="images/logo_new_d.png" alt="Mahindra Rise" class="img-responsive" style="float:right; max-width:35%;">
+					</div>
+				</div>
+	</div>
+    <div class="wrapper">
+		
+		<!-- TOP NAVIGATION --!>
+
+		<!-- nav content -->
+	<div class="navheaderTop">
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+            <a href="javascript:void(0)" class="submenu" name="homePageTab" id="homePageTab">
+            <span>Home</span>
+            </a>
+            </li>
+			<li class="verticalLine hidden-sm hidden-xs">I</li>            
+            <li>
+            <a href="javascript:void(0)" class="submenu" name="landingPage" id="landingPage">
+            <span>Instructions</span>
+            </a>
+            </li>
+                      
+			<li class="verticalLine hidden-sm hidden-xs optional hideNavbarItems">I</li>
+            <li class="optional hideNavbarItems">
+            <a href="javascript:void(0)" class="submenu" name="quesMaster" id="getQuesMaster">
+            <span>Question Bank</span>
+            </a>
+            </li>            
+			<li class="verticalLine hidden-sm hidden-xs optional hideNavbarItems">I</li>
+            <li class="optional hideNavbarItems">
+            <a href="javascript:void(0)" class="submenu" name="fbCreation" id="fbCreation">
+            <span>Template Creation</span>
+            </a>
+            </li>            
+			<li class="verticalLine hidden-sm hidden-xs optional hideNavbarItems">I</li>
+			<li class="optional hideNavbarItems">
+			<a href="javascript:void(0)" class="submenu" name="nomineeList" id="getNomineeList">
+            <span>Register Participant</span>
+            </a>
+			</li>
+			<li class="verticalLine hidden-sm hidden-xs optional hideNavbarItems">I</li>
+                <li class="optional hideNavbarItems">
+                <a href="javascript:void(0)" class="submenu" name="fbReOpenExtn" id="fbReOpenExtn">
+                <span>Feedback Extension</span>
+                </a>
+                </li>
+			<li class="verticalLine hidden-sm hidden-xs optional hideNavbarItems">I</li>
+                <li class="optional hideNavbarItems">
+                <a href="javascript:void(0)" class="submenu" name="reports" id="getReports">
+                <span>Reports</span>
+                </a>
+                </li>
+			<li class="verticalLine hidden-sm hidden-xs optional hideNavbarItems">I</li>
+                 <li class="optional hideNavbarItems">
+                 <a href="javascript:void(0)" class="submenu" name="dashBrd" id="getDashBrd">
+		         <span>Status</span>
+		         </a>
+                 </li>
+			<li class="verticalLine hidden-sm hidden-xs ">I</li>
+                 <li>
+                 <a href="changePwd.html" class="submenu" id="changePwdLink">
+		         <span>Change Password</span>
+		         </a>
+                 </li>
+                             			                			
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+           <!--  <li><button class="btn btn-default"><a href="login.html" id="signOutBtn">Sign Out</a></li> -->
+           <li class="signoutclass col-2-sx col-2-s"> <a href="login.html" class="btn btn-default btn-flat" id="signOutBtn">Sign out</a></li>
+
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+			</div>
+      <!-- /.container-fluid -->
+		</nav>
+	</div>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- dashboard start -->
+            <div class="dashboard">
+				<div class="container-fluid">
+				     <div class="content-header">
+                    	<h3 id="hdrTitle">Dashboard</h3>
+                	</div>
+				</div>
+				
+               
+                <!-- Main content -->
+                <div class="content">
+	                <!-- Landing Page Starts here -->
+	                
+        <!-- Start Main Body Section -->
+        <div class="mainbody-section text-center" id="homePage">
+            <div class="container">
+                <div class="row">              
+                    <div class="col-md-4">                        
+                        <div class="menu-item blue" id="getQuesMaster">
+                            <a href="javascript:void(0)" >
+                                <i class="fa fa-question-circle"></i>
+                                <p>Question Bank</p>
+                            </a>
+                        </div>                        
+                        <div class="menu-item light-orange" id="fbReOpenExtn">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-comments"></i>
+                                <p>Feedback Extension</p>
+                            </a>
+                        </div>						
+                    </div>
+                    
+                    <div class="col-md-4">                        
+                        <div class="menu-item light-yellow" id="fbCreation">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-newspaper-o"></i>
+                                <p>Template Creation</p>
+                            </a>
+                        </div>                        
+                        <div class="menu-item green" id="getReports">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-bar-chart"></i>
+                                <p>Reports</p>
+                            </a>
+                        </div>						
+                    </div>
+                    
+                    <div class="col-md-4">                        
+                        <div class="menu-item light-red" id="getNomineeList">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-users"></i>
+                                <p>Register Participant</p>
+                            </a>
+                        </div>                        
+                        <div class="menu-item color" id="getDashBrd">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-check-circle"></i>
+                                <p>Status</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Body Section -->
+        
+        <!-- Start Copyright Section -->
+<!--         <div class="copyright text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span>Copyright © 2016 Mahindra Rise. All rights reserved.</span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- End Copyright Section -->
+        
+				            <div id="landingPageContent" class="table-responsive">
+				            	<!-- Instructions content start -->
+				            	<div class="container-fluid">
+				            		<h3>Welcome Administrator!</h3 ><br/>
+				            		<p class="contenttext">Please select the options in the navigation menu on left hand side to do the following operations.</p>
+					            	<table class="table">
+					            		<tr>
+					            			<td class="contenttd">1)</td>
+					            			<td class="contenttext">&nbsp;Add, edit questions and view template for 360 Degree Feedback/Survey.
+											</td>
+					            		</tr>
+					            		<tr>
+					            			<td class="contenttd">2)</td>
+					            			<td id="coatext" class="contenttext">&nbsp;Authorize Sector/Company administrators to conduct surveys.
+											</td>
+					            		</tr>
+					            		<tr>
+					            			<td class="contenttd">3)</td>
+					            			<td class="contenttext">&nbsp;Nominate an employee to initiate a 360 degree feedback and track the status.</td>
+					            		</tr>
+					            		<tr>
+					            			<td class="contenttd">4)</td>
+					            			<td class="contenttext">&nbsp;View all the reports of the 360 Degree Feedback's completed.</td>
+					            		</tr>
+					            	</table>				            		
+				            	</div>
+				            	<!-- Instructions content end -->
+				            </div>	
+				            <div id="landingPageContentforCOA" class="table-responsive">
+				            	<h3>Welcome Administrator!</h3 > <br/>
+				            	<p class="contenttext">Please select the options in the navigation menu on left hand side to do the following operations.</p>
+				            	<table>
+				            		<tr>
+				            			<td class="contenttd">1)</td>
+				            			<td class="contenttext">&nbsp;View questions and template for 360 Degree Feedback/Survey
+										</td>
+				            		</tr>
+				            		<tr>
+				            			<td class="contenttd">2)</td>
+				            			<td class="contenttext">&nbsp;Nominate an employee to initiate a 360 degree feedback and track the status.</td>
+				            		</tr>
+				            		<tr>
+				            			<td class="contenttd">3)</td>
+				            			<td class="contenttext">&nbsp;View all the reports of the 360 Degree Feedback's completed.</td>
+				            		</tr>
+				            	</table>
+				            </div>			
+				            
+				            <div id="landingPageContentforSEA" class="table-responsive">
+				            	<h3>Welcome Administrator!</h3 > <br/>
+				            	<p class="contenttext">Please select the options in the navigation menu on left hand side to do the following operations.</p>
+				            	<table>
+				            		<tr>
+				            			<td class="contenttd">1)</td>
+				            			<td class="contenttext">&nbsp;View questions and template for 360 Degree Feedback/Survey
+										</td>
+				            		</tr>
+				            		<tr>
+				            			<td class="contenttd">2)</td>
+				            			<td id="coatext" class="contenttext">&nbsp;Authorize Company administrators to conduct surveys.
+										</td>
+				            		</tr>
+				            		<tr>
+				            			<td class="contenttd">3)</td>
+				            			<td class="contenttext">&nbsp;Nominate an employee to initiate a 360 degree feedback and track the status.</td>
+				            		</tr>
+				            		<tr>
+				            			<td class="contenttd">4)</td>
+				            			<td class="contenttext">&nbsp;View all the reports of the 360 Degree Feedback's completed.</td>
+				            		</tr>
+				            	</table>
+				            </div>			
+				                        
+	            		<!-- Landing Page Ends here -->
+                    <div id="quesMaster">
+                        <div class="form-group text-right">
+                        <p id="hdrTitle1" class="questionmastercontent col-sm-12">You can add and edit 360 Degree Feedback/Survey questions here.</p>
+                            <button type="button" id="questionMasterAddBtn" class="btn btn-danger addclass">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </button>
+                        </div>
+                        <table id="questionMasterTable" class="table table-striped table-bordered">
+                            <thead class="tclass">
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Question</th>
+                                    <th >Category</th>
+                                    <th>SubCategory</th>
+                                    <th>Type</th>
+                                    <!-- <th>Tag Line</th> -->
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- <tr>
+                                    <td>1.</td>
+                                    <td>How are you?</td>
+                                    <td>CAT-1</td>
+                                    <td>SUB CAT -2</td>
+                                    <td>TEXT</td>
+                                    <td>Sample question 1</td>
+                                    <td>Active</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger editDashBtn" data-toggle="tooltip" data-placement="bottom" title="Edit Question">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger deleteDashBtn" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <table id="header-fixed"></table>            
+                    </div>
+
+<!------------------------------------------------------------->
+<!----------------------- Report ------------------------------>
+
+					<form id="cristlereport" action="" method="POST" onsubmit="updateURL();" style="display:none" target="_blank">
+						FeedbackID: <input type="text" id="fbid" value="2" /><br>
+						logonencrypted:<input type="text" name="logonencrypted" value="true" /><br>
+						cmsname:<input type="text" name="cmsname" value="MMKNDBOBPR2:6400" /><br>
+						apsuser:<input type="text" name="apsuser" value="sbw_sumanth" /><br>
+						<!-- apspassword:<input type="text" name="apspassword" value="RGVjQDIwMTU=" /><br> -->
+						apspassword:<input type="text" name="apspassword" value="SmFuQDIwMTU=" /><br>Jan@2015
+						apsauthtype:<input type="text" name="apsauthtype" value="secSAPR3" /><br>
+						<button id="submitBtn" type="submit">Generate Report</button>
+					</form>
+
+                    <div id="reportMaster">
+                        <!-- <div class="form-group text-right">
+                            <button type="button" id="questionMasterAddBtn" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </button>
+                        </div> -->
+                        <table id="reportMasterTable" class="table table-striped table-bordered">
+                            <!-- <thead class="tclass">
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Nominee Name</th>
+                                    <th>Template Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Respondents</th>
+                                    <th>Responses</th>
+                                    <th>Self Feedback</th>
+                                    <th>Close</th>
+                                    <th>Status</th>
+                                    <th>View Report</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody> -->
+                        </table>
+                    </div>
+ <!-------------------------- Report------------------------- -->
+ <!---------------------------------------------------------- -->
+
+
+
+
+                     <!-- DashboardInfo -->
+                    <div id="dashMaster">
+                    <div class="form-group" style="display: block;" id="statusblock">
+                            <div class="col-md-4 form-group">
+                                <span>Name</span>
+                                <input type="text" class="form-control" id="SrchName">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <span>Status</span>
+                                <input type="text" class="form-control" id="SrchStat">
+                            </div>
+                            <div class="col-md-4 form-group">
+                               <span>Template Name</span>
+                                <input type="email" class="form-control" id="TemplateSrch">
+                            </div>
+                           
+                        
+                        <div id="srchDates" class="statusblock">
+                            <div class="col-md-6 form-group"><span>Start Date:</span> <input type="text" class="form-control" id="SrchStartDate"></div>
+                            <div class="col-md-6 form-group"><span>End Date:</span> <input type="text" class="form-control" id="SrchEndDate"></div>
+
+                        </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="button" id="SrchBtn" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-plus"></span> Search
+                            </button>
+                        </div>
+                      <!--   <div class="form-group text-right">
+                            <button type="button" id="questionMasterAddBtn" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </button>
+                        </div> -->
+                        <table id="dashMasterTable" class="table table-striped table-bordered">
+                            <!-- <thead class="tclass">
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Nominee Name</th>
+                                    <th>Template Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Respondents</th>
+                                    <th>Responses</th>
+                                    <th>Self Feedback</th>
+                                    <th>Close</th>
+                                    <th>Status</th>
+                                    <th>Remind</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>How are you?</td>
+                                    <td>CAT-1</td>
+                                    <td>SUB CAT -2</td>
+                                    <td>TEXT</td>
+                                    <td>Sample question 1</td>
+                                    <td>Active</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger editDashBtn" data-toggle="tooltip" data-placement="bottom" title="Edit Question">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger deleteDashBtn" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody> -->
+                        </table>                       
+                    
+                        <div class="statusReportDownloadBtnDiv">
+                        	<form action="DownloadStatusReportDump" method="POST">
+                        		<button type="submit" class="pull-right">Download Status Report</button>
+                        	</form>
+                        </div>
+                    </div>
+                    <!-- DashboardInfo -->
+                    
+
+					<!-- Feedback Extension -->
+				<div id="feedbackExtension">
+                        <table id="FeedbackExtensionMasterTable" class="table table-striped table-bordered">
+                            <thead class="tclass">
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Nominee Name</th>
+                                    <th>Template Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Respondents</th>
+                                    <th>Responses</th>
+                                    <th>Self Feedback</th>
+                                    <th>Extend</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                               <!--  <tr>
+                                    <td>1.</td>
+                                    <td>How are you?</td>
+                                    <td>CAT-1</td>
+                                    <td>SUB CAT -2</td>
+                                    <td>TEXT</td>
+                                    <td>Sample question 1</td>
+                                    <td>Active</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger editDashBtn" data-toggle="tooltip" data-placement="bottom" title="Edit Question">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger deleteDashBtn" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+					<!-- Feedback Extention -->
+
+
+                    <!-- Your Page Content Here -->
+                    <!-- nomination content starts here -->
+                    <!-- 					<br> <br> -->
+                    <div id="nominateEmp">
+
+                        <div class="col-md-6 form-group" id="pendingRequestDiv">
+                            <span>Select Request</span><strong>*</strong>
+                            <!-- 						<select class="form-control" id="nominationCat"> -->
+                            <!-- 							<option id="">---Select---</option> -->
+                            <!-- 							<option value="SEA">Nominate Sector Admin</option> -->
+                            <!-- 							<option value="COA">Nominate Company Admin</option> -->
+                            <!-- 							<option value="EMP">Nominate Employee</option> -->
+                            <!-- 						</select> -->
+
+                            <select class="form-control requestSelect" name="requestId" id="selectRequestId">
+                                <option id="">---Select---</option>
+                            </select>
+
+                        </div>
+						<div class="container-fluid nomiNation">
+	                        <div class="col-md-3 form-group nomiNation">
+	                            <span>Select Nomination Category <strong>*</strong></span>
+	                            <!-- 						<select class="form-control" id="nominationCat"> -->
+	                            <!-- 							<option id="">---Select---</option> -->
+	                            <!-- 							<option value="SEA">Nominate Sector Admin</option> -->
+	                            <!-- 							<option value="COA">Nominate Company Admin</option> -->
+	                            <!-- 							<option value="EMP">Nominate Employee</option> -->
+	                            <!-- 						</select> -->
+	
+	                            <select class="form-control nominSelect" name="nominList" id="nominationCat">
+	                                <option id="">---Select---</option>
+	                            </select>
+	                        </div>
+                        </div>
+                        
+                        <div class="container-fluid">
+	                        <div class="col-md-3 form-group" id="templateSelectDiv">
+	                            <span>Select Template <strong>*</strong></span>
+	                            <select class="form-control tempSelect" name="tempList" id="tempSelect">
+	                                <option id="">---Select---</option>
+	                            </select>
+	                        </div>                        
+                        </div>
+                        
+                        <div class="container-fluid">
+                        <div class="col-md-12 form-group" id="empDtlsDiv">
+                            <div class="col-md-3 form-group">
+                                <span>First Name <strong>*</strong></span>
+                                <input type="text" class="form-control" id="fName" required="required">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <span>Last Name <strong>*</strong></span>
+                                <input type="text" class="form-control" id="lName" required="required">
+                            </div>
+                            <div class="col-md-3 form-group">
+                               <span>Email <strong>*</strong></span>
+                                <input type="email" class="form-control" id="email" name="emailId" required="required">
+                            </div>
+                            <!-- excelTabDiv start -->
+                            <!-- <div class="excelTabDiv">
+                                                       Upload shareholder details start
+                                                       <div class="col-md-12" id="uploadDetails">
+                                                           <h2>
+                                                               <span class="glyphicon glyphicon-upload"></span> Upload Employee List
+                                                           </h2>
+                                                           <div class="clearfix"></div>
+                                                           <div id="fileUploaderDetails">
+                                                               <span class="glyphicon glyphicon-upload"></span> Upload
+                                                           </div>
+                                                           <div id="eventsmessage"></div>
+
+
+                                                       </div>
+                                                       Upload shareholder details end
+
+                                                   </div>
+                            -->
+                            <!-- excelTabDiv end -->
+
+                        </div>                       
+                        </div>
+                        
+                        <div class="container-fluid">
+                        <div id="nominateEmpSub">
+                            <div class="col-md-3 form-group" id="selectSectorDiv">
+                                <span>Select Sector <strong>*</strong></span>
+                                <select class="form-control secAdminSelect" name="secAdminList" id="secAdminSelect">
+                                    <option id="">---Select---</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group" id="selectCompanyDiv">
+                                <span>Select Company <strong>*</strong></span>
+                                <select class="form-control comAdminSelect" name="comAdminList" id="comAdminSelect">
+                                    <option id="">---Select---</option>
+                                </select>
+                            </div>
+
+                        </div>                       
+                        </div>
+						
+						<div class="container-fluid">
+                        <div id="reminderDiv">
+
+                        </div>
+                        </div>
+                       
+                       <div class="container-fluid nomiNation">
+                         <div class="col-md-12 form-group nomiNation">
+                            <button type="button" id="nominateBtn" class="nominateBtn">
+                                <span class="glyphicon glyphicon-plus"></span> Nominate
+                            </button>
+                        </div>                      
+                       </div>
+
+                    </div>
+                    <!-- nomination content ends here -->
+                    <div id="feedbackCreation">
+                        <div class="form-group text-right">
+                            <button type="button" id="templateMasterAddBtn" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-plus"></span> Add
+                            </button>
+                        </div>
+                        <table id="templateMasterTable" class="table table-striped table-bordered">
+                            <thead class="tclass">
+                                <tr>
+                                    <th>S. No.</th>
+                                    <th>Template Id</th>
+                                    <th>Template Name</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- <tr>
+                                 <td>1.</td>
+                                 <td>1001</td>
+                                 <td>Supervisor Feedback Template</td>
+                                 <td>Active</td>
+                                 <td>
+                                     <button type="button" class="btn btn-danger editTemplateBtn" data-toggle="tooltip" data-placement="bottom" title="Edit Question">
+                                         <span class="glyphicon glyphicon-pencil"></span>
+                                     </button>
+                                     <button type="button" class="btn btn-danger deleteTemplateBtn" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                         <span class="glyphicon glyphicon-trash"></span>
+                                     </button>
+                                 </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- dashboard end -->
+        </div>
+        <!-- /.content-wrapper -->
+        
+        <!-- Main Footer -->
+        <footer class="main-footer">
+            Copyright &copy; 2015 Mahindra Rise. All rights reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- Add Question modal start -->
+    <div class="modal fade addQuestionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Add Question</h4>
+                </div>
+                <form id="addQuestionForm">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="text-normal">Category</label>
+                            <select class="form-control" id="qbAddModalQuestCat" name="">
+                                <!-- 	<option>Select Category</option>
+                                    <option>Category-1</option>
+                                    <option>Category-2</option> -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Sub-Category</label>
+                            <select class="form-control" id="qbAddModalQuestSubCat" name="quesCatId">
+                                <option value='0'>---Select---</option>
+                                <!-- <option>Select Sub Category</option> -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question</label>
+                            <input type="text" class="form-control" id="qbAddModalQuestDesc" name="quesDesc"  maxlength="250">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Type</label>
+                            <select class="form-control" id="qbAddModalQuestType" name="quesType">
+                                <option value="0">---Select One---</option>
+                                <option value="RATING">RATING</option>
+                                <option value="TEXT">TEXT</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <span class=""><strong>Negative Question:</strong>  </span>
+                            	<input type="checkbox" value="true" class="negCheck" name="negativeQuest" id="addQuestNegCheck">
+                        </div>                        
+                        
+                     
+
+
+                        <div class="form-group" id="qbAddModalQuestOptionsDiv"></div>
+
+                       <!--  <div class="form-group">
+                            <label class="text-normal">Question Description TagLine</label>
+                            <input type="text" class="form-control" id="qbAddModalQuestDescTagLine" name="quesTagLine" maxlength="50">
+                        </div> -->
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger saveDashBtn" id="addQuestionFormSubmit">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="addQuestionFormCancelBtn">
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Add Question modal end -->
+    <!-- Edit Question modal start -->
+    <div class="modal fade editQuestionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Edit Question</h4>
+                </div>
+                <form id="editQuestionForm">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="text-normal">Category</label>
+                            <select class="form-control" id="qbEditModalQuestCat" name="" disabled>
+                                <!-- <option>Select Category</option>
+                                <option>Category-1</option>
+                                <option>Category-2</option> -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Sub-Category</label>
+                            <select class="form-control" id="qbEditModalQuestSubCat" name="quesCatId" disabled>
+                                <!-- 	<option>Select Sub Category</option> -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question</label>
+                            <input type="text" class="form-control" id="qbEditModalQuestDesc" name="quesDesc" maxlength="250">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Type</label>
+                            <select class="form-control" id="qbEditModalQuestType" name="quesType" disabled>
+                                <option value="0">---Select---</option>
+                                <option value="RATING">RATING</option>
+                                <option value="TEXT">TEXT</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="qbAddModalQuestOptionsDiv"></div>
+
+                       <!--  <div class="form-group">
+                            <label class="text-normal">Question Description TagLine</label>
+                            <input type="text" class="form-control" id="qbEditModalQuestDescTagLine" name="quesTagLine" maxlength="50">
+                        </div> -->
+                        <input type="hidden" class="form-control" id="qbEditModalQuestId" name="quesId">
+
+						<div class="form-group">
+                            <span class=""><strong>Negative Question:</strong> </span>
+                            <input type="checkbox" value="true" class="negCheck" id="editQuestNegCheck" name="negativeQuest">
+                        </div>
+
+                        <!-- radio button starts -->
+                        <div class="form-group">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default">
+                                    <input type="radio" value="Active" id="questionActive" name="quesStatus"> Active
+                                </label>
+
+                                <label class="btn btn-default">
+                                    <input type="radio" value="Inactive" id="questionInActive" name="quesStatus"> Inactive
+                                </label>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- radio button ends -->
+                    </div>
+
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger saveDashBtn" id="editQuestionFormSubmit">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Question modal end -->
+    <!-- Add Template modal start -->
+    <div class="modal fade addTemplateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-Ext modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Add Template</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Template Details
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="text-normal">Template Name</label>
+                                        <input type="text" class="form-control" id="addTemplateMasterName" name="templateName"  maxlength="50">
+                                    </div>
+                                    <!-- radio button starts -->
+                                    <div class="form-group">
+                                        <label class="text-normal">Template Status</label>
+                                        <br>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" value="Active" id="TemplateActive" name="templateStatus"> Active
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" value="Inactive" id="TemplateInActive" name="templateStatus"> Inactive
+                                            </label>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <!-- radio button ends -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                                       aria-controls="collapseTwo">Question Mapping</a>
+                                </h4>
+
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <div id="questionTemplate" class="col-md-12">
+                                        <!-- <div class="col-md-12">
+                                            <label><span id="selectedQuestionsCount">0</span> questions selected.</label>
+                                        </div> -->
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6"><button class="selectAllQuestion btn btn-default">Select All</button></div>
+                                            <label class="selectedQuestionsCountLabel col-md-6 text-right"><span class="selectedQuestionsCount">0</span> questions selected.</label>
+                                        </div>
+                                        <div id="templateQuestionListContainer" class="col-md-12">
+                                            <ul class="templateQuestionList">
+                                                <!--<li id="quesId#68"><strong>[Qid:68]</strong> Disregards money or other resources.</li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger saveDashBtn" id="addTemplateSubmit">
+                        <span class="glyphicon glyphicon-ok"></span> Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="addTemplateCancelBtn">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Template modal end -->
+
+    <!-- Edit Template modal start -->
+    <div class="modal fade editTemplateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-Ext modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">View Template</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel-group" id="editTemplateAccordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="editTemplateHeadingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#editTemplateAccordion" href="#collapseEditPanelOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Template Details
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseEditPanelOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="editTemplateHeadingOne">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="text-normal">Template Name</label>
+                                        <input type="text" class="form-control" id="editTemplateMasterName" name="templateName" disabled="">
+                                    </div>
+                                    <!-- radio button starts -->
+                                    <div class="form-group">
+                                        <label class="text-normal">Template Status</label>
+                                        <br>
+                                     	<form id="templateForm">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" value="Active" id="editTemplateActiveStatus" name="templateStatus" > Active
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" value="Inactive" id="editTemplateInActiveStatus" name="templateStatus"> Inactive
+                                            </label>
+                                        </div>
+                                        <input type="hidden" id="templateId" name="templateId" class="form-control">
+                                         <input type="hidden" id="rowIndex" name="rowIndex" class="form-control">
+										</form>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <!-- radio button ends -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="editTemplateHeadingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#editTemplateAccordion" href="#collapseEditPanelTwo" aria-expanded="false"
+                                       aria-controls="collapseTwo">Question Mapping</a>
+                                </h4>
+
+                            </div>
+                            <div id="collapseEditPanelTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="editTemplateHeadingTwo">
+                                <div class="panel-body">
+                                    <div id="questionTemplate" class="col-md-12">
+                                        <!-- <div class="col-md-12">
+                                            <label><span id="selectedQuestionsCount">0</span> questions selected.</label>
+                                        </div> -->
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6"><!-- <button class="selectAllQuestion" class="btn btn-default">Select All</button> --></div>
+                                            <label class="selectedQuestionsCountLabel" class="col-md-6 text-right"><span class="selectedQuestionsCount">0</span> questions selected.</label>
+                                        </div>
+                                        <div id="templateQuestionListContainer" class="col-md-12">
+                                            <ul class="templateQuestionList">
+                                                <!--<li id="quesId#68"><strong>[Qid:68]</strong> Disregards money or other resources.</li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger saveDashBtn" id="editTemplateSubmit">
+                        <span class="glyphicon glyphicon-ok"></span> Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="editTemplateCancelBtn">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Template modal end -->
+
+    <!-- confirmation dashboard modal start -->
+    <div id="confirmDashModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <span class="glyphicon glyphicon-warning-sign"></span> Are You Sure????
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger confirmDashBtn">
+                        <span class="glyphicon glyphicon-ok"></span> Confirm
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- confirmation dashboard modal end -->
+    <!-- excel upload report modal start -->
+    <div class="modal fade excelUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Excel Upload Report</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" id="excelUploadReportTable">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jonathan</td>
+                                <td>Almeida</td>
+                                <td>jona@mahindra.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- excel upload report modal end -->
+    
+    
+     <!-- Edit Feedback Extension modal start -->
+    <div class="modal fade editFeedbackExtensionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Edit Feedback Extension</h4>
+                </div>
+                <form id="feedbackExtensionForm">
+                    <div class="modal-body">
+                    
+                    	 <div class="form-group">
+                            <label class="text-normal">Nominee Name</label>
+                            <input type="text" class="form-control" id="editNomineeName" name="nname" maxlength="250">
+                        </div>
+						<input type="hidden" class="form-control" id="feedbackExtId" name="feedbackExtId">
+                        <div class="form-group">
+                            <label class="text-normal">Start Date</label>
+                            <input type="text" class="form-control" id="editstartdatefdext" disabled>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="text-normal">End Date</label>
+                            <input type="text" class="form-control" id="editenddatefdext">
+                        </div>
+						</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger savefdextBtn" id="editfeedbackextensionSubmit">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="editfeedbackextensionCancelbtn">
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Feedback Extension modal end -->
+
+	<!-- Respondent Status modal Starts-->
+	<div class="modal fade respondentStatusForAdmin" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" >Respondent Feedback Status</h4>
+                </div>
+                <div class="modal-body">
+                    <table id="respondantStatusForAdminTable" class="tableTest"></table>
+                    	
+				</div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" >
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Respondent Status modal Ends-->
+
+
+
+
+<script src="js/dropdown.js"></script>	
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>360DegreeFeedback</title>
+
+<!-- Bootstrap js start -->
+<script src="js/jquery.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script src="js/util.js"></script>
+<script src="js/login.js"></script>
+<script src="js/datatransfer.js"></script>
+<script src="js/session.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/pace.js"></script>
+<script src="js/sha256.js"></script>
+<script src="js/hmac-sha256.js"></script>
+<!-- <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+<script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script> -->
+
+<!-- Bootstrap js start -->
+
+<!-- Bootstrap css start -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/css.css" rel="stylesheet">
+<link href="css/sweetalert.css" rel="stylesheet" />
+<!-- <link href="css/animate.min.css" rel="stylesheet"> -->
+<!-- <link href="css/theme.css" rel="stylesheet"> -->
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	      <script src="js/html5shiv.min.js"></script>
+	      <script src="js/respond.min.js"></script>
+	    <![endif]-->
+
+</head>
+<body>
+	<div class="header">
+				<div class="container-fluid">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="mahindraLogo"><img src="images/logo.jpg" alt="Mahindra Rise" class="img-responsive"></div>					
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-6"></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"></div>
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<img src="images/logo_new_d.png" alt="Mahindra Rise" class="img-responsive" style="float:right; max-width:35%;">
+					</div>
+				</div>
+	</div>
+	<div class="container" id="container" style="display:block;">
+
+		<form class="loginform" action="LoginController" method="POST" onsubmit="return validateForm()">
+				<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+					<div class="panel-body" >
+						<!-- <div class="panel login_control ">
+							<h1 class="text-center">Login</h1>
+						    <div class="formset">
+								<div class="form-group">
+									<label class="form-label required">Email ID</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class=" glyphicon glyphicon-user"></span></span> 
+										<input type="email" class="form-control" name="emailId" id="emailIdLoginForm" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label  class="form-label">Password</label>
+									<div class="input-group">
+										<span class="input-group-addon"><span class=" glyphicon glyphicon-lock"></span></span> 
+										<input type="password" class="form-control" name="password" id="passwordLoginForm" required="required">
+									</div>
+								</div>
+								<a href="#" class="btn btn-default btn-flat" id="forgotPassword">Forgot Password ?</a>
+								<div class="text-center">
+									<input type="hidden" name="message" class="form-control" value="validateLogin">
+									<button type="submit" class="btn btn-danger">LOGIN</button>
+								</div>
+							</div>
+						</div> -->
+						<div class="panel">
+						  <h1>Login</h1>
+						  <div class="formset">
+						    <div class="form-group">
+						      <label class="form-label">User Name</label>
+						      <input type="text" name="emailId" id="emailIdLoginForm" required="required" class="form-control" autocomplete="off"/>
+						    </div>
+						    <div class="form-group">
+						      <label class="form-label">Password</label>
+						      <input type="password" name="password" id="passwordLoginForm" required="required" class="form-control" autocomplete="off"/>
+						    </div>						    
+							<!-- <div class="form-group text-center"> -->
+								<input type="hidden" name="message" class="form-control" value="validateLogin">
+								<button type="submit" class="btn btn-primary loginbtn">Login</button>
+						    <!-- </div> -->
+							<a href="#" class="btn btn-default btn-flat form-group" id="forgotPassword">Forgot Password ?</a>
+						  </div>
+						</div>
+					<!-- <div class=" col-md-12 login_control formset ">
+						<div class="form-group animated bounceInLeft">
+							<label class="required form-label">Email ID</label>
+							<div>
+								<span class="input-group-addon"><span class=" glyphicon glyphicon-user"></span></span> 
+								<input type="email" class="form-control" name="emailId" id="emailIdLoginForm" required="required">
+							</div>
+						</div>
+						<div class="form-group animated bounceInRight">
+							<label class="form-label">Password</label>
+							<div>
+								<span class="input-group-addon"><span class=" glyphicon glyphicon-lock"></span></span> 
+								<input type="password" class="form-control" name="password" id="passwordLoginForm" required="required">
+							</div>
+						</div>
+						<a href="#" class="btn btn-default btn-flat form-group" id="forgotPassword">Forgot Password ?</a>
+						<div class="form-group text-center">
+							<input type="hidden" name="message" class="form-control" value="validateLogin">
+							<button type="submit" class="btn btn-danger">LOGIN</button>
+						</div>
+					</div> -->
+				</div>
+				</div>
+			</form>
+	</div>
+<script src="js/index.js"></script>
+</body>
+</html>

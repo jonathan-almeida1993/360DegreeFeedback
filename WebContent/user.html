@@ -1,0 +1,1565 @@
+﻿<!DOCTYPE html>
+<html>
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>360DegreeFeedback</title>
+
+    <!-- JS Import starts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <!-- <script src="js/dashboard.js"></script> -->
+    <!-- <script src="js/master.js"></script> -->
+    <script src="js/datatransfer.js"></script>
+    <script src="js/jquery.serializejson.min.js"></script>
+    <script src="js/jquery.isloading.js"></script>
+    <script src="js/nprogress.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/table_specification.js"></script>		
+    <script type="text/javascript" src="js/bootstrap-table.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/session.js"></script>
+    
+
+    <!-- Question Master Datatable starts -->
+    <script src="js/dashboarddatatable.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap.js"></script>
+    <script src="js/bootbox.min.js"></script>
+    <!-- Question Master Datatable ends -->
+    <!-- JS Import ends -->
+    <!-- CSS Import starts -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/skin-red.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <link href="css/bootstrap-table.css" rel="stylesheet">
+    <link href="css/user.css" rel="stylesheet">
+    <!-- Question Master DataTable starts -->
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/styleHome.css" rel="stylesheet">
+    
+    <!-- Font Awesome CSS -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+        
+    <!-- Question Master DataTable Ends -->
+    <!-- CSS Import Ends -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="js/html5shiv.min.js"></script>
+          <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+
+	    <script type="text/javascript">
+			 $(document).ready(function() {
+		        $.active = false;
+		        $('body').bind('click keypress', function() { $.active = true; });
+		        checkActivity(1000*60*60, 1000, 0); // timeout = 30 minutes, interval = 1 minute.
+		    });
+			 
+
+		    function checkActivity(timeout, interval, elapsed) {
+		        if ($.active) {
+		            elapsed = 0;
+		            $.active = false;
+		            $.get('DataController');
+		        }
+		        if (elapsed < timeout) {
+		            elapsed += interval;
+		            setTimeout(function() {
+		                checkActivity(timeout, interval, elapsed);
+		            }, interval);
+		        } else {
+		            window.location = 'login.html'; // Redirect to "session expired" page.
+		        }
+		    }
+		
+		
+    </script>
+	
+
+
+</head>
+<body class="skin-red sidebar-mini bodyElement userContentContainer">
+<div class="ct-preloader"><div class="ct-preloader-content"></div></div>
+		<div class="header">
+				<div class="container-fluid">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="mahindraLogo"><img src="images/logo.jpg" alt="Mahindra Rise" class="img-responsive"></div>					
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-6"></div>
+					<div class="col-md-3 col-sm-3 col-xs-6"></div>
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<img src="images/logo_new_d.png" alt="Mahindra Rise" class="img-responsive" style="float:right; max-width:35%;">
+					</div>
+				</div>
+	</div>
+	
+		<!-- nav content -->
+	<div class="navheaderTop">
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active">
+            <a href="javascript:void(0)" class="bounceInRight" name="usersHomePage" id="getUserHomePage">
+            <span>Home</span>
+            </a>
+            </li>
+			<li class="verticalLine hidden-sm hidden-xs">I</li>
+            <li class>
+            <a href="javascript:void(0)" class="bounceInRight" name="dashBrd" id="getDashBrd">
+            <span>Instructions</span>
+            </a>
+            </li>
+			<li class="verticalLine hidden-sm hidden-xs">I</li>			
+            <li>
+             <a href="javascript:void(0)" class="submenu" name="outbox1" id="outbox1">
+             <span>Enroll Observer</span>
+             </a>
+            </li>
+			<li class="verticalLine hidden-sm hidden-xs" id="respondentline">I</li>
+                <li>
+                <a href="javascript:void(0)" class="submenu"  name="inbox1" id="inbox1">
+                <span>Give Self feedback</span></a>
+               </li>
+			<li class="verticalLine hidden-sm hidden-xs" id="respondentline">I</li>     
+				<li>
+                <a href="javascript:void(0)" class="submenu" name="inbox2" id="inbox2">
+	             <span>Give Others feedback</span>
+	            </a>
+                </li>       			
+			<li class="verticalLine hidden-sm hidden-xs">I</li>
+			<li> <a href="javascript:void(0)" class="submenu" name="outbox2" id="outbox2">
+            <span>Status</span></a></li>
+			<li class="verticalLine hidden-sm hidden-xs">I</li>
+			<li> <a href="changePwd.html" class="submenu" name="" id="changePwdLink">
+            <span>Change Password</span></a></li>
+          </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+            <!-- <li><button class="btn btn-default"><a href="login.html" id="signOutBtn">Sign Out</a></li> -->
+            <li class="signoutclass"> <a href="login.html" class="btn btn-default btn-flat" id="signOutBtn">Sign out</a></li>
+
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+			</div>
+      <!-- /.container-fluid -->
+		</nav>
+	</div>
+	
+    <div class="wrapper">
+
+        <!-- Main Header -->
+<!--         <header class="main-header">
+
+            <!-- Logo -->
+
+            <!-- Header Navbar 
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="glyphicon glyphicon-align-justify"></span>
+                </a>
+                <!-- Navbar Right Menu 
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">					
+						<li class="user-footer">                                   
+							<div class="pull-right">
+								<a href="login.html" class="btn btn-default btn-flat" id="signOutBtn">Sign out</a>
+								<!-- <button class="btn btn-default btn-flat" id="signOutBtn">Sign out</button> 
+							</div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+                <div class="headerwrapper">
+ 					<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			  <div class="container">
+
+				<!-- <div class="navbar-header">
+				  <a class="navbar-brand top-navbar-brand" href="#"><img height="95" width="95" src="images/logo_new.png"/></a>
+				</div>				
+			  </div>
+			</nav>
+            </div> -->
+        <!-- Left side column. contains the logo and sidebar -->
+        <!--<aside class="main-sidebar">
+
+             sidebar: style can be found in sidebar.less -->
+            <!-- <section class="sidebar">
+                <!-- Sidebar user panel (optional)
+                <div class="user-panel">
+                    <!-- <div class="text-center image">
+                        <img src="images/user2-160x160.jpg" class="img-circle usrImg" alt="User Image" />
+                    </div>
+
+                </div>
+                <!-- Sidebar Menu 
+                <ul class="sidebar-menu">
+                    <!-- <li class="header">Menu</li> -->
+                    <!-- Optionally, you can add icons to the links 
+                    <li class="treeview active">
+                        <a href="javascript:void(0)" class="animated bounceInRight" name="dashBrd" id="getDashBrd">
+                            <i class='glyphicon glyphicon-home'></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <!--EMP segments start here  
+                     <li class="treeview inboxMenu" id="nominateraters">
+                        <a href="javascript:void(0)" class="animated bounceInRight submenu" name="outbox1" id="outbox1">
+                            <i class='glyphicon glyphicon-list'></i>
+                            <span>Enroll / Select Your<br/><span style="margin-left: 25px;">Observers</span></span>
+                            <!-- <i class="glyphicon glyphicon-chevron-down pull-right"></i> 
+                        </a>
+
+							<!--<ul class="treeview-menu">
+                            <li>
+                                <a href="javascript:void(0)" class="animated bounceInRight submenu" name="outbox1" id="outbox1">
+                                    <i class='glyphicon glyphicon-dashboard'></i> <span>Select respondents</span>
+                                </a>
+                            </li>
+                        </ul> 
+                    </li>
+                    <li class="treeview inboxMenu">
+                        <a href="#" class="animated bounceInRight">
+                            <i class='glyphicon glyphicon-list'></i>
+                            <span>Complete Survey</span>
+                            <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="javascript:void(0)" class="animated bounceInRight submenu" name="inbox1" id="inbox1">
+                                    <i class='glyphicon glyphicon-dashboard'></i> <span>Self feedback</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)" class="animated bounceInRight submenu" name="inbox2" id="inbox2">
+                                    <i class='glyphicon glyphicon-dashboard'></i> <span>Others feedback</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                   
+                    <li class="treeview inboxMenu">
+                        <a href="javascript:void(0)" class="animated bounceInRight submenu" name="outbox2" id="outbox2">
+                                    <i class='glyphicon glyphicon-list'></i> <span>Survey Status</span>
+                        </a>
+                    </li>
+                    <!--EMP segments ends here  
+                </ul>
+                <!-- /.sidebar-menu 
+            </section> -->
+            <!-- /.sidebar 
+        </aside>-->
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <!-- dashboard start -->
+            <div class="dashboard">
+                <!-- Main content -->
+                <div class="content">
+                    <!-- Your Page Content Here -->
+                    <!-- Following Structure is followed
+                        div#nominateEmp
+                            div.peers
+                            div.peers
+                            div.seniors
+                            div.seniors
+                            div.subordinates
+                            div.subordinates
+                            div.others
+                            div.others
+                    -->
+<!-- Start Main Body Section -->
+        <div class="mainbody-section text-center" id="userHomePage">
+            <div class="container">
+                <div class="row">              
+                    <div class="col-md-4">                        
+                        <div class="menu-item blue" id="outbox1">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-user"></i>
+                                <p>Enroll Observer</p>
+                            </a>
+                        </div>                        
+                        <div class="menu-item green" id="inbox2">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-users"></i>
+                                <p>Give Others Feedback</p>
+                            </a>
+                        </div>						
+                    </div>
+                    
+                    <div class="col-md-4">                        
+                        <!-- Start Carousel Section -->
+                        <div class="home-slider">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="padding-bottom: 30px;">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+<!--                                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+ -->                                </ol>
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <<div class="item active">
+                                        <img src="images/about-01.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="item">
+                                        <img src="images/about-02.jpg" class="img-responsive" alt="">
+                                    </div>
+                                    <!-- <div class="item">
+                                        <img src="images/about-01.jpg" class="img-responsive" alt="">
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start Carousel Section -->                        
+                    </div>
+                    
+                    <div class="col-md-4">                        
+                        <div class="menu-item light-red" id="inbox1">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-comment-o"></i>
+                                <p>Give Self Feedback</p>
+                            </a>
+                        </div>                        
+                        <div class="menu-item color" id="outbox2">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-check-circle"></i>
+                                <p>Status</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Body Section -->
+
+                    <div id="nominateEmp" class="container">
+						<div class="container-fluid instRuctions">
+							<div class="col-md-10 instRuctions">
+								<div>
+									<p></p>
+									<p>
+										<b><u>Instructions</u>:-</b>
+									</p>
+									<p>
+										<strong>1.</strong> Please enter the First name, Last name and Email Address of each observer you would like to add to your
+										Observer list.
+									</p>
+									<p>
+										<strong>2. With the exception of your Superior and Subordinates, you must have at least 3 observer in Peers and Others
+											category.</strong>
+									</p>
+									<p>
+										<strong>3. </strong>When you have entered the observers, click the <strong>Submit</strong> button. Your will automatically be sent
+										an email notifying them how to complete the survey.
+									</p>
+								</div>
+							</div>
+
+							<div class="col-md-2 instRuctions">
+								<div class="addMore">
+									<button type="button" class="btn btn-info btn-sm moreBtn" data-toggle="modal" data-target="#moreResponent" id="addMoreRespondentsBtnAfterSubmit" >
+										<span class="glyphicon glyphicon-plus-sign"></span> More Repondents
+									</button>
+
+									<!-- Modal -->
+									<div class="modal fade" id="moreResponent" role="dialog">
+										<div class="modal-dialog modal-lg">
+
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">Add Respondents</h4>
+												</div>
+												<div class="modal-body">
+
+													<div class="respondentForm" id="addtionalRespondentForms">
+														<form id="additionalRespondentForm1">
+															<!-- addtional respondent row#1 starts -->
+															 <input type="hidden" value="-1" name="respondentId" />
+			                                                 <input type="hidden" value="SAVE" name="operationType" />
+			                                                 
+			                                                <div class="col-md-12">
+			                                                	<div class="col-md-2">
+																	<label for="firstName">First Name</label>
+																</div>
+																<div class="col-md-2">
+																	<label for="lastName">Last Name</label>																	
+																</div>
+																<div class="col-md-3">
+																	<label for="inputEmail">Email</label>
+																</div>
+																<div class="col-md-3">
+																	<label for="category">Category</label>
+																</div>
+			                                                </div>
+			                                                
+															<div class="col-md-12">
+																<div class="col-md-2">
+																	<div class="form-group">
+																		<input type="text" class="respondControl" name="respondentFName">
+																	</div>
+																</div>
+																<div class="col-md-2">
+																	<div class="form-group">
+																		<input type="text" class="respondControl" name="respondentLName">
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<input type="email" class="respondControl" name="respondentEmailId">
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="form-group">
+																		<select class="respondControl"  name="empRelation">
+																			<option value="-1">Select Respondent Type</option>
+																			<option value="SENIOR">Senior</option>
+																			<option value="PEER">Peer</option>
+																			<option value="SUBORDINATE">Subordinate</option>
+																			<option value="OTHER">Other</option>
+																		</select>
+																	</div>
+																</div>
+																<div class="col-md-2 addMoreRespondentRowsBtnDiv">
+																		<button type="button" class="btn addBtn" id="addMoreRespondentRow">
+																			<span class="glyphicon glyphicon-plus-sign"></span>
+																		</button>
+																</div>
+
+															</div>
+															<!-- addtional respondent row#1 ends -->
+														</form>
+													</div>
+
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default submitBtn" id="submitAdditionalRespondentsBtn">Submit</button>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
+						<!-- 						<div>
+                    		<p></p>
+	                    	<p><b><u>Instructions</u>:-</b></p>
+	                    	<p><strong>1.</strong>	Please enter the First name, Last name and Email Address of each observer you would like to add to your Observer list.</p>
+	                    	<p><strong>2.	With the exception of your Superior and Subordinates, you must have at least 3 observer in Peers and Others category.</strong></p>
+	                    	<p><strong>3.	</strong>When you have entered the observers, click the <strong>Submit</strong> button. Your  will automatically be sent an email notifying them how to complete the survey.</p>
+	                    </div> -->
+	                    <hr/>
+
+	                    <div  id="selectRespondentTable" class="row">
+	                    	<div id="selectRespondentTableHeader" class="col-md-12 col-xs-12 col-sm-12">
+	                    		<label class="col-md-2 col-xs-2 col-sm-2 relationshipHeader">Relationship</label>
+	                    		<div class="col-md-10 col-xs-10 col-sm-10 otherHeaders">
+	                    			<div class="row">
+	                    				<div class="col-md-11 col-xs-11 col-sm-11">
+	                    				<label class="col-md-3 col-xs-3 col-sm-3">First Name</label>
+	                    				<label class="col-md-3 col-xs-3 col-sm-3">Last Name</label>
+	                    				<label class="col-md-6 col-xs-6 col-sm-6">Email ID</label>
+	                    			</div>
+	                    				<div class="col-md-1 col-sm-1"></div>
+	                    			</div>	
+	                    		</div>        		
+	                    	</div>
+	                    	
+	                    	<div id="seniorsTab" class="tab-pane col-md-12 col-xs-12 col-sm-12">
+	                    		<div class="col-md-2 col-xs-2 col-sm-2"><label>Superior</label></div>
+	                    		<div class="col-md-10 col-xs-10 col-sm-10 content">
+	                    			<div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-10 senior">
+                                            <form class="senior">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SENIOR" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-3"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewSeniorRowBtn">
+                                        </div>
+                                    </div>
+	                    		</div>
+	                    	</div>
+	                    	<div id="peersTab" class="tab-pane col-md-12 col-xs-12 col-sm-12">
+	                    		<div class="col-md-2 col-xs-2 col-sm-2">
+	                    		<input type="checkbox" name="peersTab" value="peersChecked" checked="checked" disabled="disabled">
+	                    		<label>Peers</label>
+	                    		</div>
+	                    		<div class="col-md-10 col-xs-10 col-sm-10 content">                    			
+	                    			<div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 peer">
+	                                        <form class="peer">
+                                                <input type="hidden" name="respondentId" value="-1"/>
+                                                <input type="hidden" name="empRelation" value="PEER" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 deleteBtnHolder">
+                                            <!-- <img src="images/removeBtn.png" width="20"> -->
+                                        </div>
+                                    </div>
+	                    			<div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 peer">
+	                                        <form class="peer">
+                                                <input type="hidden" name="respondentId" value="-1"/>
+                                                <input type="hidden" name="empRelation" value="PEER" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 deleteBtnHolder">
+                                            <!-- <img src="images/removeBtn.png" width="20"> -->
+                                        </div>
+                                    </div>
+	                    			<div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 peer">
+	                                        <form class="peer">
+                                                <input type="hidden" name="respondentId" value="-1"/>
+                                                <input type="hidden" name="empRelation" value="PEER" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewPeerRowBtn">
+                                        </div>
+                                    </div>
+	                    		</div>
+	                    	</div>
+	                    	<div id="subordinatesTab" class="tab-pane col-md-12 col-xs-12 col-sm-12">
+	                    		<div class="col-md-2 col-xs-2 col-sm-2">
+	                    		<input type="checkbox" name="subordinatesTab" value="subordinatesChecked" checked="checked" disabled="disabled">
+	                    		<label>Subordinates</label>
+	                    		</div>
+	                    		<div class="col-md-10 col-xs-10 col-sm-10 content">
+	                    			<div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 subordinate">
+                                            <form class="subordinate">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SUBORDINATE" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 deleteBtnHolder">
+                                            <!-- <img src="images/removeBtn.png" width="20"> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 subordinate">
+                                            <form class="subordinate">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SUBORDINATE" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 deleteBtnHolder">
+                                            <!-- <img src="images/removeBtn.png" width="20"> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 subordinate">
+                                            <form class="subordinate">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SUBORDINATE" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewSubordinateRowBtn">
+                                        </div>
+                                    </div>
+	                    		</div>
+	                    	</div>
+	                    	<div id="othersTab" class="tab-pane col-md-12 col-xs-12 col-sm-12">
+	                    		<div class="col-md-2 col-xs-2 col-sm-2">
+	                    		<input type="checkbox" name="othersTab" value="othersChecked" checked="checked" disabled="disabled" style="position: relative;top: 12px;">
+	                    		<label style="position: absolute; top: 1px;">Others (Stakeholders / Vendors / Customers)</label>
+	                    		</div>
+	                    		<div class="col-md-10 col-xs-10 col-sm-10 content">
+	                    			<div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 other">
+                                            <form class="other">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="OTHER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 deleteBtnHolder">
+                                            <!-- <img src="images/removeBtn.png" width="20"> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 other">
+                                            <form class="other">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="OTHER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 deleteBtnHolder">
+                                            <!-- <img src="images/removeBtn.png" width="20"> -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 col-xs-11 col-sm-11 other">
+                                            <form class="other">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="OTHER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3 col-xs-3 col-sm-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6 col-xs-6 col-sm-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 col-xs-1 col-sm-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewOtherRowBtn">
+                                        </div>
+                                    </div>
+	                    		</div>
+	                    	</div>
+	                    </div>                    
+	                    
+                        <!-- <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="pill" href="#peersTab">Peers</a></li>
+                            <li><a data-toggle="pill" href="#seniorsTab">Seniors</a></li>
+                            <li><a data-toggle="pill" href="#subordinatesTab">Subordinates</a></li>
+                            <li><a data-toggle="pill" href="#othersTab">Others</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="peersTab" class="tab-pane fade in active">
+                                <h3 class="caption col-md-12">Peers</h3>
+                                <div class="content col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-11 peer">
+	                                        <form class="peer">
+                                                <input type="hidden" name="respondentId" value="-1"/>
+                                                <input type="hidden" name="empRelation" value="PEER" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        Code for partial save starts here
+                                        <div class="col-md-3"><p class="form-control-label fname">Jonathan</p></div>
+                                        <div class="col-md-3"><p class="form-control-label lname">Almeida</p></div>
+                                        <div class="col-md-6"><p class="form-control-label emailId">jonathan.almeida@bcone.com</p></div>
+                                        Code for partial save ends here
+                                        <div class="col-md-1 deleteBtnHolder">
+                                            <img src="images/removeBtn.png" width="20">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 peer">
+                                            <form class="peer">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="PEER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        Code for partial save starts here
+                                        <div class="col-md-3"><p class="form-control-label fname">Jonathan</p></div>
+                                        <div class="col-md-3"><p class="form-control-label lname">Almeida</p></div>
+                                        <div class="col-md-6"><p class="form-control-label emailId">jonathan.almeida@bcone.com</p></div>
+                                        Code for partial save ends here
+                                        <div class="col-md-1 deleteBtnHolder">
+                                            <img src="images/removeBtn.png" width="20">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-11 peer">
+                                            <form class="peer">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="PEER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="text" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewPeerRowBtn">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <input type="button" class="btn btn-default" value="SUBMIT" name="btnSubmit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="seniorsTab" class="tab-pane fade">
+                                <h3 class="caption col-md-12">Seniors</h3>
+                                <div class="content col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-11 senior">
+                                            <form class="senior">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SENIOR" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewSeniorRowBtn">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <input type="button" class="btn btn-default" value="SUBMIT" name="btnSubmit"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="subordinatesTab" class="tab-pane fade">
+                                <h3 class="caption col-md-12">Subordinates</h3>
+                                <div class="content col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-11 subordinate">
+                                            <form class="subordinate">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SUBORDINATE" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 deleteBtnHolder">
+                                            <img src="images/removeBtn.png" width="20">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 subordinate">
+                                            <form class="subordinate">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SUBORDINATE" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 deleteBtnHolder">
+                                            <img src="images/removeBtn.png" width="20">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 subordinate">
+                                            <form class="subordinate">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="SUBORDINATE" />
+                                                <input type="hidden" name="operationType" value="SAVE"/>
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewSubordinateRowBtn">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <input type="button" class="btn btn-default" value="SUBMIT" name="btnSubmit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="othersTab" class="tab-pane fade">
+                                <h3 class="caption col-md-12">Others(Clients...)</h3>
+                                <div class="content col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-11 other">
+                                            <form class="other">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="OTHER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 deleteBtnHolder">
+                                            <img src="images/removeBtn.png" width="20">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 other">
+                                            <form class="other">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="OTHER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 deleteBtnHolder">
+                                            <img src="images/removeBtn.png" width="20">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-11 other">
+                                            <form class="other">
+                                                <input type="hidden" name="respondentId" value="-1" />
+                                                <input type="hidden" name="empRelation" value="OTHER" />
+                                                <input type="hidden" name="operationType" value="SAVE" />
+                                                <div class="col-md-3"><input type="text" class="form-control fname" name="respondentFName" placeholder="First Name" /></div>
+                                                <div class="col-md-3"><input type="text" class="form-control lname" name="respondentLName" placeholder="Last Name" /></div>
+                                                <div class="col-md-6"><input type="email" class="form-control emailId" name="respondentEmailId" placeholder="Email ID" /></div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-1 addBtnHolder">
+                                            <img src="images/addBtn.png" width="20" id="addNewOtherRowBtn">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <input type="button" class="btn btn-default" value="SUBMIT" name="btnSubmit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12 btnHolder">
+                                    <!-- <input type="button" class="btn btn-default" value="SAVE TO COMPLETE LATER" id="respondentSaveBtn" name="btnSubmit" /> -->
+                                    <input type="button" class="btn btn-default" id="respondentSubmitBtn" value="SUBMIT" name="btnSubmit" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					
+
+                    <!-- Dashboard content starts here -->
+                    <div id="dashboard" style="margin-top: 20px;">
+                         <div id="landingPageContentForNominatedEmp">
+	                   	<p>Welcome <b><span id="loggedInUserName"></span></b>, </p>
+			            	<p><b><u>Instructions</u>:-</b></p>
+			            	<table>
+			            		<tr>
+			            			<td>1)&nbsp;Click the <b>“Enroll – Select Your Observers”</b> link on the navigation panel to enroll your list of observers.
+									After the observers are added, review the list carefully for email address accuracy. When satisfied with your list, click the submit button. Your observers will automatically be sent an email notifying them how to complete the survey. 
+
+										<p><strong>Please note: </strong> Once you have submitted the list, you will not be able to remove observers.</p>
+									</td>
+			            		</tr>
+			            		
+			            		<tr>
+			            			<td>2)&nbsp;Use <b>“Complete Surveys”</b> link to complete your survey(s).</td>
+			            		</tr>
+			            		<tr>
+			            			<td>3)&nbsp;To review the completion status of the surveys, choose the <b>“Survey Status”</b> link.</td>
+			            		</tr>
+			            	</table>
+	                   </div> 
+			            <div id="landingPageContentForRespondent">
+			            	<p>Welcome <b><span id="loggedInUser"></span></b>, </p>
+			            	<p><b><u>Instructions:</u></b></p>
+			            	<p>Use the <b>“Complete Survey”</b> link to complete your surveys.</p>
+			            </div>
+                    </div>
+
+
+                    <!-- Dashboard content ends here -->
+                    <!-- Your Page Content Here -->
+                    <!--FeedBack Form starts here-->
+                    <div id="feedbackForm">
+                        <div id="contentForSelfFeedbackForm">
+                    		<p>The major purpose of the Rise 360 degree feedback is to collect data comparing the individual’s self-evaluation on personal characteristics required to live the Rise Pillars that guide our thoughts and actions each day, at the workplace and outside with the evaluations of others.</p>
+                    		<p>The resulting profile provides detailed information so that the individual can see a pattern of Rise leadership strengths and possible concerns as seen by self versus others.</p>
+                    		<p>Please select one of the following responses to indicate how descriptive each item is of you.</p>
+                    		<div class="row form-group">
+                    			<div class="col-md-6">
+	                    			<table>
+	                    				<tr>
+	                    					<td>Always / Almost Always <span class='always'>&nbsp;&nbsp;</span></td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Usually </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Often </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Sometimes </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Rarely </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Never / Almost Never</td>	
+	                    				</tr>
+	                    			</table>
+                    			</div>	
+                    		</div>
+                    		<p>It may be possible that you have not seen any evidence on some of the attributes, for those attributes you could choose <b>No Evidence.</b> </p>
+                    		<p>You can complete this feedback in one sitting, or if you prefer, you can save your responses and continue it later by clicking on "Save to Complete later".</p>
+                    		<p>Your first impression is usually most useful.</p>
+                    		<!-- <p>Work rapidly. Your first impression is usually most useful</p> -->
+                    		<p>Person being rated:  <B><span id="selfName"></span></B></p> 
+                    	</div>
+                    	
+                    	<div id="contentForOthersFeedbackForm">
+                    		<p>The major purpose of the Rise 360 degree feedback is to collect data comparing the individual’s self-evaluation on personal characteristics required to live the Rise Pillars that guide our thoughts and actions each day, at the workplace and outside with the evaluations of others.</p>
+                    		<p>The resulting profile provides detailed information so that the individual can see a pattern of Rise leadership strengths and possible concerns as seen by self versus others.</p>
+                    		<p>Please select one of the following responses to indicate how descriptive each item is of you.</p>
+                    		<div class="row form-group">
+                    			<div class="col-md-6">
+	                    			<table>
+	                    				<tr>
+	                    					<td>Always / Almost Always </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Usually </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Often </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Sometimes &nbsp;&nbsp;</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Rarely </td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td>Never / Almost Never </td>
+	                    				</tr>
+	                    			</table>
+                    			</div>	
+                    		</div>
+                    		<p>It may be possible that you have not seen any evidence on some of the attributes, for those attributes you could choose <b>No Evidence.</b></p>
+                    		<p>You can complete this feedback in one sitting, or if you prefer, you can save your responses and continue it later by clicking on "Save to Complete later".</p>
+                    		<p>Your first impression is usually most useful.</p>
+                    		<!-- <p>Work rapidly. Your first impression is usually most useful</p> -->
+                    		<p>Person being rated:  <B><span id="nameOfFeedbackSeeker">Other Feedback User name</span></B></p>
+                    	</div>
+
+                        <div class="form-group feedbackHeader top-header">
+                            <div class="header">
+                               <!--  <h4>Give us your opinion</h4> -->
+                               <h4></h4>
+                                <input type="button" class="btn btn-default" value="Save to complete later" name="btnSave" id="SaveBtn" />
+                            </div>
+							<ul>
+								<li class="row">
+									<div class="col-md-5 col-xs-5">
+										<label>Questions</label></div>
+										<div class="col-md-7 col-xs-12 col-sm-12">
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">Always / </label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">Usually</label>
+										<label class="col-md-1 col-xs-1 col-sm-1 text-center">Often</label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">Sometimes</label>
+										<label class="col-md-1 col-xs-1 col-sm-1 text-center">Rarely</label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">Never /</label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">No Evidence</label>
+									</div>
+								</li>
+							</ul>
+							<ul>
+								<li class="row">
+									<div class="col-md-5 col-xs-5">
+										<label></label></div>
+										<div class="col-md-7 col-xs-12 col-sm-12">
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">Almost Always</label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center"></label>
+										<label class="col-md-1 col-xs-1 col-sm-1 text-center"></label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center"></label>
+										<label class="col-md-1 col-xs-1 col-sm-1 text-center"></label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center">Almost Never</label>
+										<label class="col-md-2 col-xs-1 col-sm-1 text-center"></label>
+									</div>
+								</li>
+							</ul>
+							
+                        </div>
+                        <div class="form-group">
+                        <div id="feedbackQuestionListHolder" class="form-group">
+						      <ul id="feedbackQuestionList">
+                              </ul>
+                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12 btnHolder">
+                                        <input type="button" id="FeedBackSubmitBtn" class="btn btn-default" value="SUBMIT" name="btnSubmit" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--FeedBack Form ends here-->
+                    <!-- Others Feedback Dashboard content starts here -->
+                    <div id="feedbackDashboard">
+                        <div class="tileRow">
+                            <div class="tile col-sm-12 col-xs-12">
+                                <h3 class="caption col-md-12 col-sm-12 col-xs-12">Peers</h3>
+                                <p class="col-md-12 col-sm-12 col-xs-12">
+                                    It's called peer review for a reason. You, putative reviewer, are the peer. 
+									If you don't do it for them why should they do it for you?</p>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img src="images/peer.png" width="100" />
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 requestCountHolder">
+                                        <!--<a href="#" class="viewMoreBtn">View More...</a>-->
+                                        <h5><b id="pendingPeerRequestCount">0</b> Pending Requests</h5>
+                                        <h5><b id="inprogressPeerRequestCount">0</b> Inprogress Requests</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tile col-sm-12 col-xs-12">
+                                <h3 class="caption col-md-12 col-sm-12 col-xs-12">Seniors</h3>
+                                <p class="col-md-12 col-sm-12 col-xs-12">
+                                 Your Seniors have asked for your valuable feedback...Dont miss the chance to say something about them.
+                            </br>     
+                            
+                                 </p>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img src="images/peer.png" width="100" />
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 requestCountHolder">
+                                        <!--<a href="#" class="viewMoreBtn">View More...</a>-->
+                                        <h5><b id="pendingSeniorRequestCount">0</b> Pending Requests</h5>
+                                        <h5><b id="inprogressSeniorRequestCount">0</b> Inprogress Requests</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tileRow">
+                            <div class="tile col-sm-12 col-xs-12">
+                                <h3 class="caption col-md-12 col-sm-12 col-xs-12">Subordinates</h3>
+                                <p class="col-md-12 col-sm-12 col-xs-12">Although often one of the most difficult tasks for a supervisor or manager to conduct, 
+feedback produces valuable results when done correctly. <!-- This cultivating process allows you to 
+shape and improve subordinate motivation, productivity, behavior and skill sets. -->  
+                                </p>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img src="images/peer.png" width="100" />
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 requestCountHolder">
+                                        <!--<a href="#" class="viewMoreBtn">View More...</a>-->
+                                        <h5><b id="pendingSubordinateRequestCount">0</b> Pending Requests</h5>
+                                        <h5><b id="inprogressSubordinateRequestCount">0</b> Inprogress Requests</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tile col-sm-12 col-xs-12">
+                                <h3 class="caption col-md-12 col-sm-12 col-xs-12">Others(Clients)</h3>
+                                <p class="col-md-12 col-sm-12 col-xs-12">
+                                    Wanna help your vendors serve you better? Please provide your valuable feedback here.                                  </p>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-6">
+                                        <img src="images/peer.png" width="100" />
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 requestCountHolder">
+                                        <!--<a href="#" class="viewMoreBtn">View More...</a>-->
+                                        <h5><b id="pendingOtherRequestCount">0</b> Pending Requests</h5>
+                                        <h5><b id="inprogressOtherRequestCount">0</b> Inprogress Requests</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Others Feedback Dashboard content ends here -->
+                    <!-- All Respondant View starts here-->
+                    <div id="allRespondentTableView">
+                        <div class="form-group">
+                            <ul id="allFeedbackRespondentlist">
+                                <li class="header col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Name</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Status</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Action</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Jonathan Almeida</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Nikita Shah</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Submitted</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Ashutosh Malankar</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Submitted</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Vandana Rai</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Sonal Tirlotkar</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Ajay Dubey</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!--All Respondant View ends here-->
+                    
+					<!--Respondant View starts here-->
+					<div id="respondantTableView">
+					<div class="col-md-9" style="padding-left:0px; margin-bottom:20px;">
+                    		<p></p>
+	                    	<p><b><u>Instructions</u>:-</b></p>
+	                    	<p id="feedbacktext">Please complete the pending feedbacks.</p>	                    	
+	                    </div>
+                        <table id="fdTable"></table>
+                        <!--<div class="form-group">
+                            <ul id="list">
+                                <li class="header col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Name</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Status</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Action</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Jonathan Almeida</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Nikita Shah</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Submitted</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Ashutosh Malankar</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Submitted</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Vandana Rai</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Sonal Tirlotkar</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                                <li class="col-md-12 col-sm-12 col-xs-12">
+                                    <span class="col-md-5 col-sm-5 col-xs-5">Ajay Dubey</span>
+                                    <span class="col-md-3 col-sm-3 col-xs-3">Pending</span>
+                                    <span class="col-md-4 col-sm-4 col-xs-4">Feedback</span>
+                                </li>
+                            </ul>
+                        </div>-->
+                    </div>
+					<!--Respondant View ends here-->
+					
+					<!--Status View starts here-->
+					<div id="respondantStatusTableView">
+						<div class="col-md-9" style="padding-left: 0px;padding-bottom: 21px;">
+	<p style="padding-left: -10px; "><b><u>Survey Status</u>:-</b></p>
+	<!-- <p>Enrollment submitted on:<span id="enrollmentSubmittedDt"> 22/12/2015</span></p>
+	<p>Survey Due<span id="surveyDueDt"> 25/12/2015</span></p> -->
+	<p class="surveyPara">This page displays the current status of your surveys. You can use this page to monitor the completion status of your raters.</p>
+</div>
+						<!--<hr/>-->
+                        <table id="respondantStatusTable"></table>
+                    </div>
+                    <!--Status View ends here-->
+					
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- dashboard end -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer">
+
+            <!-- Default to the left -->
+            Copyright &copy; 2015 Mahindra Rise. All rights reserved.
+        </footer>
+    </div>
+    <!-- ./wrapper -->
+    <!-- Add Question modal start -->
+    <div class="modal fade addQuestionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Add</h4>
+                </div>
+                <form id="addQuestionForm">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Category</label>
+                            <select class="form-control" id="qbAddModalQuestCat" name="">
+                                <option>Select Category</option>
+                                <option>Category-1</option>
+                                <option>Category-2</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Sub-Category</label>
+                            <select class="form-control" id="qbAddModalQuestSubCat" name="">
+                                <option>Select Sub Category</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Description</label>
+                            <input type="text" class="form-control" id="qbAddModalQuestDesc" name="quesDesc">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Type</label>
+                            <select class="form-control" id="qbAddModalQuestType" name="quesType">
+                                <option>RATING</option>
+                                <option>CHOOSE ONE</option>
+                                <option>YES/NO</option>
+                                <option>TEXT</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="qbAddModalQuestOptionsDiv"></div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Description TagLine</label>
+                            <input type="text" class="form-control" id="qbAddModalQuestDescTagLine" name="quesTagLine">
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger saveDashBtn" id="addQuestionFormSubmit">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Add Question modal end -->
+    <!-- Edit Question modal start -->
+    <div class="modal fade editQuestionModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Edit</h4>
+                </div>
+                <form id="editQuestionForm">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Category</label>
+                            <select class="form-control" id="qbEditModalQuestCat" name="">
+                                <option>Select Category</option>
+                                <option>Category-1</option>
+                                <option>Category-2</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Sub-Category</label>
+                            <select class="form-control" id="qbEditModalQuestSubCat" name="">
+                                <option>Select Sub Category</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Description</label>
+                            <input type="text" class="form-control" id="qbEditModalQuestDesc" name="quesDesc">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Type</label>
+                            <select class="form-control" id="qbEditModalQuestType" name="quesType">
+                                <option>RATING</option>
+                                <option>CHOOSE ONE</option>
+                                <option>YES/NO</option>
+                                <option>TEXT</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="qbAddModalQuestOptionsDiv"></div>
+
+                        <div class="form-group">
+                            <label class="text-normal">Question Description TagLine</label>
+                            <input type="text" class="form-control" id="qbEditModalQuestDescTagLine" name="quesTagLine">
+                        </div>
+                        <input type="hidden" class="form-control" id="qbEditModalQuestId" name="quesId">
+
+                        <!-- radio button starts -->
+                        <div class="form-group">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default">
+                                    <input type="radio" value="Active" id="questionActive" name="quesStatus"> Active
+                                </label>
+
+                                <label class="btn btn-default">
+                                    <input type="radio" value="Inactive" id="questionInActive" name="quesStatus"> Inactive
+                                </label>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- radio button ends -->
+                    </div>
+
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger saveDashBtn" id="editQuestionFormSubmit">
+                            <span class="glyphicon glyphicon-ok"></span> Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Edit Question modal end -->
+    <!-- Add Template modal start -->
+    <div class="modal fade addTemplateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-Ext modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Add Template</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Template Details
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="text-normal">Template Name</label>
+                                        <input type="text" class="form-control" id="addTemplateMasterName" name="templateName">
+                                    </div>
+                                    <!-- radio button starts -->
+                                    <div class="form-group">
+                                        <label class="text-normal">Template Status</label>
+                                        <br>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" value="Active" id="TemplateActive" name="templateStatus"> Active
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" value="Inactive" id="TemplateInActive" name="templateStatus"> Inactive
+                                            </label>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <!-- radio button ends -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                                       aria-controls="collapseTwo">Question Mapping</a>
+                                </h4>
+
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <iframe id="templateCreationPage"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger saveDashBtn" id="addTemplateSubmit">
+                        <span class="glyphicon glyphicon-ok"></span> Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add Template modal end -->
+    <!-- confirmation dashboard modal start -->
+    <div id="confirmDashModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <span class="glyphicon glyphicon-warning-sign"></span> Are You Sure????
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger confirmDashBtn">
+                        <span class="glyphicon glyphicon-ok"></span> Confirm
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- confirmation dashboard modal end -->
+    <!-- excel upload report modal start -->
+    <div class="modal fade excelUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Excel Upload Report</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered" id="excelUploadReportTable">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jonathan</td>
+                                <td>Almeida</td>
+                                <td>jona@mahindra.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- excel upload report modal end -->
+<script src="js/dropdown.js"></script>
+</body>
+</html>
