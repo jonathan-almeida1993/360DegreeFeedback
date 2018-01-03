@@ -1,5 +1,5 @@
 # 360DegreeFeedback
-This web application allows the Mahindra Group Corporate HR to conduct 360 degree surveys in more than 50 companies belonging to the group.
+In order to help the employees know their strengths and weaknesses and become more effective, the Mahindra Group corporate HR uses this application to conduct 360 Degree surveys in more than 20 companies belonging to this group. 
 
 **Note:**
 This project is the property of Mahindra Group Corporate HR. Please do not reuse the code.
