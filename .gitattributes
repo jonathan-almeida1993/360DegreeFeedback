@@ -1,1 +1,3 @@
-
+special-vendored-path/* linguist-vendored
+jquery.min.js linguist-vendored=false
+bootstrap.js linguist-vendored=false
